@@ -3,7 +3,6 @@ package dev.bmac.gradle.intellij;
 import com.github.rholder.retry.*;
 import com.google.common.io.ByteSource;
 import com.google.common.io.CharStreams;
-import com.sun.istack.Nullable;
 import dev.bmac.gradle.intellij.repos.LocalRepo;
 import dev.bmac.gradle.intellij.repos.Repo;
 import dev.bmac.gradle.intellij.repos.RestRepo;
@@ -14,6 +13,7 @@ import org.gradle.api.GradleException;
 import org.gradle.api.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

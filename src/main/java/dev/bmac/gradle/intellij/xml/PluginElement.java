@@ -1,6 +1,7 @@
 package dev.bmac.gradle.intellij.xml;
 
 import com.google.common.net.UrlEscapers;
+import org.eclipse.persistence.oxm.annotations.XmlCDATA;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -11,7 +12,10 @@ public class PluginElement {
     private String id;
     private String url;
     private String version;
+
+    @XmlCDATA
     private String description;
+    @XmlCDATA
     private String changeNotes;
     private String name;
     private IdeaVersionElement versionInfo;
