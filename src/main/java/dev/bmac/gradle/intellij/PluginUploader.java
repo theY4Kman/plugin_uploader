@@ -4,6 +4,7 @@ import com.github.rholder.retry.*;
 import com.google.common.io.ByteSource;
 import com.google.common.io.CharStreams;
 import com.sun.istack.Nullable;
+import dev.bmac.gradle.intellij.repos.LocalRepo;
 import dev.bmac.gradle.intellij.repos.Repo;
 import dev.bmac.gradle.intellij.repos.RestRepo;
 import dev.bmac.gradle.intellij.repos.S3Repo;
@@ -373,15 +374,11 @@ public class PluginUploader {
     }
 
     protected Repo getRepoType() {
-        switch (repoType) {
-            case REST_POST:
-            case REST_PUT:
-                return new RestRepo(url, authentication, repoType);
-            case S3:
-                return new S3Repo(url, authentication);
-            default:
-                throw new IllegalStateException("Upload method not implemented for " + repoType.name());
-        }
+        return switch (repoType) {
+            case REST_POST, REST_PUT -> new RestRepo(url, authentication, repoType);
+            case S3 -> new S3Repo(url, authentication);
+            case LOCAL -> new LocalRepo(url, authentication);
+        };
     }
 
     static String getPluginVersion() {
@@ -400,7 +397,8 @@ public class PluginUploader {
     public enum RepoType {
         REST_POST,
         REST_PUT,
-        S3
+        S3,
+        LOCAL
     }
 
     /**
